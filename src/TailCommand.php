@@ -63,7 +63,7 @@ class TailCommand extends Command
         $environmentConfig = $this->getEnvironmentConfiguration($environment);
 
         Ssh::create($environmentConfig['user'], $environmentConfig['host'])
-            ->configureProcess(fn (Process $process) => $process->setTty(true))
+            ->configureProcess(function(Process $process) { return $process->setTty(true); })
             ->onOutput(function ($type, $line) {
                 $this->handleClearOption();
 
